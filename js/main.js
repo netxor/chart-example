@@ -28,6 +28,9 @@ var chart1, chart2;
 $(document).ready(function() {
 
     // First chart initialization
+    var options = {
+
+    }
     chart1 = new Highcharts.Chart({
      chart: {
         renderTo: 'chart_1',
@@ -115,50 +118,6 @@ $(document).ready(function() {
         }]
     });
 // --------------------------------------------------------------------------------
-    // Second chart initialization (pie chart)
-    chart2 = new Highcharts.Chart({
-        chart: {
-            renderTo: 'chart_2',
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            height: 350,
-        },
-        title: {
-            text: 'Pie Chart Diagram'
-        },
-        tooltip: {
-            pointFormat: '<b>{point.percentage}%</b>',
-            percentageDecimals: 1
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-         series: [{
-         type: 'pie',
-            name: 'Dev #1',
-            data: [
-                ['Processing.js', 5],
-                ['Impact.js', 10],
-                ['Other', 20],
-                ['Ease.js', 22],
-                ['Box2D.js', 25],
-                ['WebGL', 28],
-                ['DOM', 30],
-                ['CSS', 40],
-                ['Canvas', 80],
-                ['Javascript', 90]
-            ]
-         }]
-    });
-
     // Switchers (of the Chart1 type) - onclick handler
     /*
     $('.switcher').click(function () {
