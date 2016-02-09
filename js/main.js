@@ -27,10 +27,12 @@ var chart1, chart2;
 // Once DOM (document) is finished loading
 $(document).ready(function() {
 
-    // First chart initialization
-    var options = {
+    var url = 'http://data.egov.kz/api/v2/pollut_river/data?pretty';
 
-    }
+    $.getJSON(url, function(data) {
+
+      
+    // First chart initialization
     chart1 = new Highcharts.Chart({
      chart: {
         renderTo: 'chart_1',
@@ -116,6 +118,7 @@ $(document).ready(function() {
             name : "р. Нура (Карагандинская)"
           }]
         }]
+      });
     });
 // --------------------------------------------------------------------------------
     // Switchers (of the Chart1 type) - onclick handler
