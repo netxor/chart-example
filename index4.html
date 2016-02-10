@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Temporary highchart</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script type="text/javascript">
+  var data = [{
+    "id" : 4,
+    "index" : 1.76,
+    "name" : "р.Буктырма (ВКО)"
+  }, {
+    "id" : 9,
+    "index" : 12.46,
+    "name" : "р.Красноярка (ВКО)"
+  }, {
+    "id" : 11,
+    "index" : 1.64,
+    "river" : "р. Емель (ВКО)"
+  }, {
+    "id" : 16,
+    "index" : 0,
+    "river" : "р. Жайык (Атырауская)"
+  }, {
+    "id" : 23,
+    "index" : 2.3,
+    "river" : "р. Елек (ЗКО)"
+  }, {
+    "id" : 28,
+    "index" : 1.29,
+    "river" : "р. Каргалы (Актюбинская)"
+  }, {
+    "id" : 30,
+    "index" : 1.39,
+    "river" : "р. Ыргыз (Актюбинская)"
+  }, {
+    "id" : 35,
+    "index" : 5.07,
+    "river" : "р.Тобыл (Костанайская)"
+  }, {
+    "id" : 42,
+    "index" : 2.48,
+    "river" : "р.Беттыбулак (Акмолинская)"
+  }, {
+    "id" : 47,
+    "index" : 5.28,
+    "river" : "р.Нура (Карагандинская)"
+  }]
+
+  // Highcharts requires the y option to be set
+  $.each(data, function (i, x) {
+     x.y = x.index;
+  });
+
+
+  var chart = new Highcharts.Chart({
+
+      chart: {
+          renderTo: 'container',
+          type: 'column'
+      },
+
+      series: [{
+          data: data
+      }]
+
+  });
+  </script>
+</head>
+<body>
+  <div id="container" style="height: 400px"></div>
+</body>
+</html>
