@@ -20,6 +20,7 @@ function ChangeChartType(chart, series, newType) {
     }
 }
 */
+
 var data = [ {
   "id" : 4,
   "index" : 1.76,
@@ -62,58 +63,64 @@ var data = [ {
   "river" : "р.Нура (Карагандинская)"
 } ];
 
+
 $(document).ready(function() {
 
-  $.each(data, function (i, point) {
-      point.y = point.index;
-      point.name = point.river;
+  //$.getJSON("js/data.json", function(data) {
+
+    $.each(data, function (i, point) {
+        point.y = point.index;
+        point.name = point.river;
+    });
+
+        // First chart initialization
+    var chart1 = new Highcharts.Chart({
+
+        chart: {
+            renderTo: 'chart_1',
+            type: 'column',
+            height: 350,
+        },
+
+        title: {
+            text: 'Изменения комплексного индекса загрязненности воды на реках Республики Казахстан'
+        },
+
+        xAxis: {
+            categories: ['р. Буктырма (ВКО)', 'р. Красноярка (ВКО)', 'р. Емель (ВКО)', 'р. Жайык (Атырауская)', 'р. Елек (ЗКО)', 'р. Каргалы (Актюбинская)', 'р. Ыргыз (Актюбинская)', 'р. Тобыл (Костанайская)', 'р. Беттыбулак (Акмолинская)', 'р. Нура (Карагандинская)']
+        },
+
+        yAxis: {
+            title: {
+                text: 'Процент Загрязнения Реки'
+            }
+        },
+
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}%'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+         },
+
+        series: [{
+            colorByPoint: true,
+            data: data
+        }]
+    });
+
+
   });
 
-      // First chart initialization
-  var chart1 = new Highcharts.Chart({
-
-      chart: {
-          renderTo: 'chart_1',
-          type: 'column',
-          height: 350,
-      },
-
-      title: {
-          text: 'Изменения комплексного индекса загрязненности воды на реках Республики Казахстан'
-      },
-
-      xAxis: {
-          categories: ['р. Буктырма (ВКО)', 'р. Красноярка (ВКО)', 'р. Емель (ВКО)', 'р. Жайык (Атырауская)', 'р. Елек (ЗКО)', 'р. Каргалы (Актюбинская)', 'р. Ыргыз (Актюбинская)', 'р. Тобыл (Костанайская)', 'р. Беттыбулак (Акмолинская)', 'р. Нура (Карагандинская)']
-      },
-
-      yAxis: {
-          title: {
-              text: 'Процент Загрязнения Реки'
-          }
-      },
-
-      plotOptions: {
-          series: {
-              borderWidth: 0,
-              dataLabels: {
-                  enabled: true,
-                  format: '{point.y:.1f}%'
-              }
-          }
-      },
-
-      tooltip: {
-          headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-          pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-       },
-
-      series: [{
-          colorByPoint: true,
-          data: data
-      }]
-  });
-  
-});
+//});
 
 
 // --------------------------------------------------------------------------------
