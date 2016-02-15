@@ -21,107 +21,83 @@ function ChangeChartType(chart, series, newType) {
 }
 */
 
-var data = [ {
-  "id" : 4,
-  "index" : 1.76,
-  "river" : "р.Буктырма (ВКО)"
-}, {
-  "id" : 9,
-  "index" : 12.46,
-  "river" : "р.Красноярка (ВКО)"
-}, {
-  "id" : 11,
-  "index" : 1.64,
-  "river" : "р. Емель (ВКО)"
-}, {
-  "id" : 16,
-  "index" : 0,
-  "river" : "р. Жайык (Атырауская)"
-}, {
-  "id" : 23,
-  "index" : 2.3,
-  "river" : "р. Елек (ЗКО)"
-}, {
-  "id" : 28,
-  "index" : 1.29,
-  "river" : "р. Каргалы (Актюбинская)"
-}, {
-  "id" : 30,
-  "index" : 1.39,
-  "river" : "р. Ыргыз (Актюбинская)"
-}, {
-  "id" : 35,
-  "index" : 5.07,
-  "river" : "р.Тобыл (Костанайская)"
-}, {
-  "id" : 42,
-  "index" : 2.48,
-  "river" : "р.Беттыбулак (Акмолинская)"
-}, {
-  "id" : 47,
-  "index" : 5.28,
-  "river" : "р.Нура (Карагандинская)"
-} ];
-
-
 $(document).ready(function() {
 
-  //$.getJSON("js/data.json", function(data) {
+  var arr = new Array();
 
-    $.each(data, function (i, point) {
-        point.y = point.index;
-        point.name = point.river;
-    });
+  var options = {
 
-        // First chart initialization
-    var chart1 = new Highcharts.Chart({
+    chart: {
+      renderTo: 'chart_1',
+      type: "spline",
+      height: 350,
+    },
 
-        chart: {
-            renderTo: 'chart_1',
-            type: 'column',
-            height: 350,
-        },
+    title: {
+      text: 'Изменения комплексного индекса загрязненности воды на реках Республики Казахстан'
+    },
 
-        title: {
-            text: 'Изменения комплексного индекса загрязненности воды на реках Республики Казахстан'
-        },
+    xAxis: {
+      type: 'category',
+      allowDecimals: false,
+      title: {
+        text: ""
+      }
+    },
 
-        xAxis: {
-            categories: ['р. Буктырма (ВКО)', 'р. Красноярка (ВКО)', 'р. Емель (ВКО)', 'р. Жайык (Атырауская)', 'р. Елек (ЗКО)', 'р. Каргалы (Актюбинская)', 'р. Ыргыз (Актюбинская)', 'р. Тобыл (Костанайская)', 'р. Беттыбулак (Акмолинская)', 'р. Нура (Карагандинская)']
-        },
+    yAxis: {
+      title: {
+        text: 'Уровень Загрязнения Реки'
+      }
+    },
 
-        yAxis: {
-            title: {
-                text: 'Процент Загрязнения Реки'
-            }
-        },
+    plotOptions: {
+      series: {
+        borderWidth: 0,
+        dataLabels: {
+          enabled: true,
+          format: '{point.y:.1f}%'
+        }
+      }
+    },
 
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.y:.1f}%'
-                }
-            }
-        },
+    tooltip: {
+      headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
 
-        tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-         },
+    series: [{
+      colorByPoint: true,
+      data: arr
+    }]
 
-        series: [{
-            colorByPoint: true,
-            data: data
-        }]
-    });
+  }
 
+  $.getJSON('js/data.json', function(data) {
+
+    // Populate series
+    for (i = 0; i < data.length; i++) {
+      arr.push([data[i].river, data[i].index]);
+    }
+
+    var chart1 = new Highcharts.Chart(options);
 
   });
 
-//});
+});
 
+/*
+  $.each(data, function (i, point) {
+      point.y = point.index;
+      point.name = point.river;
+      //point.name = point.xAsis.categories;
+  });
+
+      // First chart initialization
+
+
+});
+*/
 
 // --------------------------------------------------------------------------------
     // Switchers (of the Chart1 type) - onclick handler

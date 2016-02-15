@@ -13,40 +13,42 @@ body{
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-            var processed_json = new Array();
+      var processed_json = new Array();
             $.getJSON("js/data.json", function(data) {
+
+
                 // Populate series
                 for (var i = 0; i < data.length; i++){
                     processed_json.push([data[i].key, data[i].value]);
                 }
 
                 // draw chart
-                $('#container').highcharts({
-                chart: {
-                    type: "column"
-                },
-                title: {
-                    text: "Student data"
-                },
-                xAxis: {
-                    type: 'category',
-                    allowDecimals: false,
-                    title: {
-                        text: ""
-                    }
-                },
-                yAxis: {
-                    title: {
-                        text: "Scores"
-                    }
-                },
-                series: [{
-                  name: 'Subjects',
-                  data: processed_json
-                }]
+                var chart1 = new Highcharts.Chart({
+                  chart: {
+                      type: "column"
+                  },
+                  title: {
+                      text: "Student data"
+                  },
+                  xAxis: {
+                      type: 'category',
+                      allowDecimals: false,
+                      title: {
+                          text: ""
+                      }
+                  },
+                  yAxis: {
+                      title: {
+                          text: "Scores"
+                      }
+                  },
+                  series: [{
+                    name: 'Subjects',
+                    data: processed_json
+                  }]
+                })
             });
         });
-    });
 </script>
 </head>
 <body>
