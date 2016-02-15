@@ -25,11 +25,13 @@ $(document).ready(function() {
 
   var arr = new Array();
 
+  var chart1;
+
   var options = {
 
     chart: {
       renderTo: 'chart_1',
-      type: "spline",
+      type: "column",
       height: 350,
     },
 
@@ -39,7 +41,6 @@ $(document).ready(function() {
 
     xAxis: {
       type: 'category',
-      allowDecimals: false,
       title: {
         text: ""
       }
@@ -61,10 +62,10 @@ $(document).ready(function() {
       }
     },
 
-    tooltip: {
+    /*tooltip: {
       headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
       pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-    },
+    },*/
 
     series: [{
       colorByPoint: true,
@@ -80,24 +81,11 @@ $(document).ready(function() {
       arr.push([data[i].river, data[i].index]);
     }
 
-    var chart1 = new Highcharts.Chart(options);
+    chart1 = new Highcharts.Chart(options);
 
   });
 
 });
-
-/*
-  $.each(data, function (i, point) {
-      point.y = point.index;
-      point.name = point.river;
-      //point.name = point.xAsis.categories;
-  });
-
-      // First chart initialization
-
-
-});
-*/
 
 // --------------------------------------------------------------------------------
     // Switchers (of the Chart1 type) - onclick handler
