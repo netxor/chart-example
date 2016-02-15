@@ -25,8 +25,6 @@ $(document).ready(function() {
 
   var arr = new Array();
 
-  var chart1;
-
   var options = {
 
     chart: {
@@ -62,10 +60,10 @@ $(document).ready(function() {
       }
     },
 
-    /*tooltip: {
+    tooltip: {
       headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
-    },*/
+      pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b><br/>'
+    },
 
     series: [{
       colorByPoint: true,
@@ -81,7 +79,7 @@ $(document).ready(function() {
       arr.push([data[i].river, data[i].index]);
     }
 
-    chart1 = new Highcharts.Chart(options);
+    var chart1 = new Highcharts.Chart(options);
 
   });
 
